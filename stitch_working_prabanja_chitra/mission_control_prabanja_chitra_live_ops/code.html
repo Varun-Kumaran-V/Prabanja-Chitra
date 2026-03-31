@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "error": "#ffb4ab",
+                        "secondary-fixed-dim": "#a0d0c6",
+                        "surface-variant": "#32353c",
+                        "on-tertiary-fixed-variant": "#7c2d11",
+                        "on-surface": "#e1e2eb",
+                        "on-error-container": "#ffdad6",
+                        "on-primary": "#003731",
+                        "secondary-container": "#21514a",
+                        "outline": "#859490",
+                        "on-secondary-fixed-variant": "#1f4e47",
+                        "on-secondary": "#003731",
+                        "primary-fixed": "#71f8e4",
+                        "on-surface-variant": "#bbcac6",
+                        "on-tertiary-container": "#6c2106",
+                        "tertiary": "#ffb59e",
+                        "outline-variant": "#3c4947",
+                        "inverse-on-surface": "#2e3037",
+                        "surface-container-lowest": "#0b0e14",
+                        "surface-tint": "#4fdbc8",
+                        "on-primary-fixed": "#00201c",
+                        "primary-container": "#14b8a6",
+                        "secondary-fixed": "#bbece2",
+                        "on-secondary-fixed": "#00201c",
+                        "on-tertiary": "#5e1800",
+                        "tertiary-container": "#f38764",
+                        "on-primary-fixed-variant": "#005048",
+                        "tertiary-fixed": "#ffdbd0",
+                        "surface-dim": "#10131a",
+                        "tertiary-fixed-dim": "#ffb59e",
+                        "primary-fixed-dim": "#4fdbc8",
+                        "on-error": "#690005",
+                        "error-container": "#93000a",
+                        "secondary": "#a0d0c6",
+                        "surface-container": "#1d2026",
+                        "surface": "#10131a",
+                        "primary": "#4fdbc8",
+                        "on-secondary-container": "#92c2b8",
+                        "inverse-primary": "#006b5f",
+                        "surface-container-low": "#191c22",
+                        "on-tertiary-fixed": "#3a0b00",
+                        "on-background": "#e1e2eb",
+                        "background": "#10131a",
+                        "surface-container-highest": "#32353c",
+                        "on-primary-container": "#00423b",
+                        "inverse-surface": "#e1e2eb",
+                        "surface-container-high": "#272a31",
+                        "surface-bright": "#363940"
+                    },
+                    fontFamily: {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #10131a; color: #e1e2eb; -webkit-font-smoothing: antialiased; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-panel { background: rgba(29, 32, 38, 0.8); backdrop-filter: blur(20px); }
+        .hero-glow { background: radial-gradient(circle at center, rgba(79, 219, 200, 0.15) 0%, transparent 70%); }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#1d2026]/80 backdrop-blur-xl border-b border-[#4fdbc8]/15 shadow-[0_24px_48px_rgba(0,0,0,0.4)]">
+<div class="flex justify-between items-center h-16 px-8 max-w-[1440px] mx-auto font-['Inter'] antialiased tracking-tight">
+<div class="text-xl font-semibold tracking-[-0.02em] text-[#e1e2eb]">Prabanja Chitra</div>
+<div class="hidden md:flex gap-8 items-center h-full">
+<a class="text-[#e1e2eb]/70 hover:text-[#e1e2eb] transition-colors" href="#">Home</a>
+<a class="text-[#e1e2eb]/70 hover:text-[#e1e2eb] transition-colors" href="#">Working</a>
+<a class="text-[#4fdbc8] border-b-2 border-[#4fdbc8] pb-1 font-bold" href="#">Mission Control</a>
+<a class="text-[#e1e2eb]/70 hover:text-[#e1e2eb] transition-colors" href="#">Comparison</a>
+<a class="text-[#e1e2eb]/70 hover:text-[#e1e2eb] transition-colors" href="#">Metrics</a>
+<a class="text-[#e1e2eb]/70 hover:text-[#e1e2eb] transition-colors" href="#">Architecture</a>
+</div>
+<button class="bg-primary text-on-primary px-5 py-2 rounded-lg font-semibold hover:bg-[#32353c] hover:text-primary transition-all duration-200 active:scale-95">
+                Launch Dashboard
+            </button>
+</div>
+</nav>
+<main class="pt-24 pb-12 px-8 max-w-[1440px] mx-auto min-h-screen">
+<!-- Compact Status Strip -->
+<div class="grid grid-cols-2 md:grid-cols-6 gap-4 mb-8">
+<div class="bg-surface-container border-l-4 border-primary p-3 rounded-lg flex flex-col justify-center">
+<span class="text-[0.6875rem] uppercase tracking-[0.05em] text-on-surface-variant font-bold">System Mode</span>
+<span class="text-primary font-bold">{{system_mode}}</span>
+</div>
+<div class="bg-surface-container p-3 rounded-lg flex flex-col justify-center">
+<span class="text-[0.6875rem] uppercase tracking-[0.05em] text-on-surface-variant">Satellites</span>
+<span class="text-on-surface text-xl font-bold">{{satellite_count}}</span>
+</div>
+<div class="bg-surface-container p-3 rounded-lg flex flex-col justify-center">
+<span class="text-[0.6875rem] uppercase tracking-[0.05em] text-on-surface-variant">Debris Tracking</span>
+<span class="text-on-surface text-xl font-bold">{{debris_count}}</span>
+</div>
+<div class="bg-surface-container border-l-4 border-error p-3 rounded-lg flex flex-col justify-center">
+<span class="text-[0.6875rem] uppercase tracking-[0.05em] text-error font-bold">Critical Threats</span>
+<span class="text-error text-xl font-bold">{{critical_threats}}</span>
+</div>
+<div class="bg-surface-container p-3 rounded-lg flex flex-col justify-center">
+<span class="text-[0.6875rem] uppercase tracking-[0.05em] text-on-surface-variant">Maneuvers</span>
+<span class="text-on-surface text-xl font-bold">{{maneuver_count}}</span>
+</div>
+<div class="bg-surface-container p-3 rounded-lg flex flex-col justify-center">
+<span class="text-[0.6875rem] uppercase tracking-[0.05em] text-on-surface-variant">Total Fuel</span>
+<span class="text-secondary-fixed-dim text-xl font-bold">{{fuel_remaining_pct}}</span>
+</div>
+</div>
+<!-- Operational Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- LEFT COLUMN: Threats -->
+<aside class="lg:col-span-3 flex flex-col gap-6">
+<!-- Active Threats -->
+<section>
+<div class="flex items-center justify-between mb-4">
+<h2 class="text-[0.6875rem] uppercase tracking-[0.05em] font-bold text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-error">warning</span>
+                            Active Threats
+                        </h2>
+<span class="text-[0.6rem] text-on-surface-variant">RANKED BY PROBABILITY</span>
+</div>
+<div class="flex flex-col gap-3">
+<!-- Critical Risk Card -->
+<div class="bg-surface-container-high p-4 rounded-xl border border-error/10 relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-error"></div>
+<div class="flex justify-between items-start mb-2">
+<span class="text-xs font-bold text-on-surface">{{top_threat_id}}</span>
+<span class="px-2 py-0.5 rounded-sm text-[0.6rem] font-bold bg-error/20 text-error uppercase">Critical</span>
+</div>
+<div class="text-[0.6875rem] text-on-surface-variant mb-1">Collision Probability: {{collision_probability}}</div>
+<div class="text-[0.6875rem] text-on-surface-variant">Time to TCA: {{time_to_tca}}</div>
+</div>
+<!-- High Risk Card (Placeholder for dynamic list) -->
+<div class="bg-surface-container p-4 rounded-xl border border-tertiary-container/10 relative overflow-hidden opacity-80">
+<div class="absolute top-0 left-0 w-1 h-full bg-tertiary-container"></div>
+<div class="flex justify-between items-start mb-2">
+<span class="text-xs font-bold text-on-surface">{{next_threat_id}}</span>
+<span class="px-2 py-0.5 rounded-sm text-[0.6rem] font-bold bg-tertiary-container/20 text-tertiary-container uppercase">High</span>
+</div>
+<div class="text-[0.6875rem] text-on-surface-variant mb-1">Impact Risk Monitored</div>
+<div class="text-[0.6875rem] text-on-surface-variant">Tracking Active</div>
+</div>
+</div>
+</section>
+<!-- Unprotected Satellites -->
+<section class="bg-surface-container-low p-4 rounded-xl border border-outline-variant/10">
+<h2 class="text-[0.6875rem] uppercase tracking-[0.05em] font-bold text-on-surface mb-4">Unprotected Assets</h2>
+<div class="space-y-3">
+<div class="flex items-center justify-between text-[0.6875rem]">
+<span class="text-on-surface-variant">SAT-ALPHA-7</span>
+<span class="text-error">SHIELD OFFLINE</span>
+</div>
+<div class="flex items-center justify-between text-[0.6875rem]">
+<span class="text-on-surface-variant">SAT-OMEGA-2</span>
+<span class="text-on-surface-variant opacity-50">LOW OBSCURATION</span>
+</div>
+</div>
+</section>
+</aside>
+<!-- CENTER COLUMN: Visualization -->
+<main class="lg:col-span-6 flex flex-col gap-6">
+<!-- Main Visualization Canvas -->
+<div class="bg-surface-container-lowest rounded-xl min-h-[480px] relative border border-primary/5 flex items-center justify-center overflow-hidden">
+<div class="absolute inset-0 hero-glow opacity-40"></div>
+<img alt="Satellite orbital tracks" class="absolute inset-0 w-full h-full object-cover opacity-60" data-alt="digital representation of satellite orbital paths over a dark stylized earth with glowing cyan and magenta data points and technical telemetry overlays" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNw4Yvfp6ak1huvv6WCJjs9-3mrt-arB5YcVSszvbSvYsV1NvBRGR4QvY6Tjb-HkUGZUJ5rxmQ5hXvYlcUGpABjDQin8lRgfH6oAo_k6nYTSPP4RiZ6iKpDpHVxpN5yJ9pjplfL_kBVOwl7fFHaoIV0DHibd00DzQQ1N8PA8TFuFlVCkT2IlpuQRDa2xrrVLVdU5fEUca3hIW9adimrM5jpiIJeazDFKJJq6X98aESMMdOPLqVaCHxVvl0RiH77jFbJJ_6CZq0GIpM"/>
+<!-- HUD Overlays -->
+<div class="absolute top-6 left-6 flex flex-col gap-1">
+<span class="text-[0.6rem] text-primary/70 uppercase tracking-widest">Ground Track Alpha</span>
+<span class="text-lg font-bold text-on-surface">REGION-4_SECTOR_9</span>
+</div>
+<!-- Miss Distance Bullseye -->
+<div class="absolute bottom-6 right-6 w-32 h-32 border border-primary/20 rounded-full flex items-center justify-center">
+<div class="w-20 h-20 border border-primary/40 rounded-full"></div>
+<div class="w-8 h-8 border border-primary/60 rounded-full flex items-center justify-center">
+<div class="w-1 h-1 bg-error rounded-full"></div>
+</div>
+<span class="absolute -top-4 text-[0.6rem] text-on-surface-variant">MISS DISTANCE</span>
+</div>
+<!-- Decision Explanation Bubble -->
+<div class="absolute bottom-10 left-10 max-w-xs glass-panel p-4 rounded-xl border border-primary/20">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-sm text-primary">psychology</span>
+<span class="text-[0.6875rem] font-bold text-primary uppercase">Autonomous Decision</span>
+</div>
+<p class="text-[0.6875rem] leading-relaxed text-on-surface-variant">
+                            {{decision_reason}}
+                        </p>
+</div>
+</div>
+<!-- Live Maneuver Timeline -->
+<div class="bg-surface-container-low p-5 rounded-xl border border-outline-variant/10">
+<h3 class="text-[0.6875rem] uppercase tracking-[0.05em] font-bold mb-4">Operational Timeline</h3>
+<div class="relative h-1 w-full bg-surface-container-highest rounded-full overflow-hidden mb-6">
+<div class="absolute h-full bg-primary w-2/3"></div>
+<div class="absolute h-full bg-error w-2 left-[75%]"></div>
+</div>
+<div class="grid grid-cols-4 text-center">
+                            {{maneuver_timeline}}
+                        </div>
+</div>
+</main>
+<!-- RIGHT COLUMN: Metrics & Logs -->
+<aside class="lg:col-span-3 flex flex-col gap-6">
+<!-- Fuel Status -->
+<section class="grid grid-cols-1 gap-4">
+<div class="bg-surface-container p-4 rounded-xl">
+<div class="flex justify-between items-center mb-2">
+<span class="text-[0.6875rem] uppercase font-bold text-on-surface-variant">Fleet Fuel Status</span>
+<span class="material-symbols-outlined text-primary text-sm">ev_station</span>
+</div>
+<div class="flex items-end gap-2 mb-3">
+<span class="text-2xl font-bold">{{fuel_remaining_pct}}</span>
+<span class="text-on-surface-variant text-xs pb-1">% NOMINAL</span>
+</div>
+<div class="w-full bg-surface-container-lowest h-1.5 rounded-full">
+<div class="bg-primary h-full rounded-full" style="width: 94%"></div>
+</div>
+</div>
+</section>
+<!-- Satellite Health Summary -->
+<section class="bg-surface-container p-5 rounded-xl">
+<h3 class="text-[0.6875rem] uppercase tracking-[0.05em] font-bold mb-4 text-on-surface">Fleet Telemetry</h3>
+<div class="space-y-4">
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_rgba(79,219,200,0.4)]"></div>
+<div class="flex-1">
+<div class="flex justify-between text-[0.6875rem] mb-1">
+<span>Signal Strength</span>
+<span>-42 dBm</span>
+</div>
+<div class="w-full h-1 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[85%]"></div>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_rgba(79,219,200,0.4)]"></div>
+<div class="flex-1">
+<div class="flex justify-between text-[0.6875rem] mb-1">
+<span>Core Temp</span>
+<span>24°C</span>
+</div>
+<div class="w-full h-1 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[40%]"></div>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-error animate-pulse shadow-[0_0_8px_rgba(255,180,171,0.4)]"></div>
+<div class="flex-1">
+<div class="flex justify-between text-[0.6875rem] mb-1 text-error">
+<span>AOCS Subsystem</span>
+<span>Degraded</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Event Log -->
+<section class="bg-surface-container-lowest border border-outline-variant/15 p-5 rounded-xl flex-1 flex flex-col">
+<h3 class="text-[0.6875rem] uppercase tracking-[0.05em] font-bold mb-4 text-on-surface">Mission Log</h3>
+<div class="space-y-4 overflow-y-auto max-h-[300px] pr-2">
+                            {{event_log}}
+                        </div>
+<div class="mt-4 pt-4 border-t border-outline-variant/10 flex items-center justify-between">
+<span class="text-[0.6rem] uppercase text-on-surface-variant font-bold">Verification Status</span>
+<span class="px-2 py-1 rounded bg-primary/10 text-primary text-[0.6rem] font-bold">SECURE</span>
+</div>
+</section>
+</aside>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 border-t border-[#4fdbc8]/10 bg-[#0b0e14]">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 max-w-[1440px] mx-auto gap-8 text-[0.6875rem] uppercase tracking-[0.05em] font-['Inter']">
+<div class="text-lg font-bold text-[#e1e2eb]">Prabanja Chitra</div>
+<div class="flex gap-12">
+<a class="text-[#e1e2eb]/40 hover:text-[#4fdbc8] transition-opacity" href="#">Documentation</a>
+<a class="text-[#e1e2eb]/40 hover:text-[#4fdbc8] transition-opacity" href="#">Mission Logs</a>
+<a class="text-[#e1e2eb]/40 hover:text-[#4fdbc8] transition-opacity" href="#">Privacy</a>
+<a class="text-[#e1e2eb]/40 hover:text-[#4fdbc8] transition-opacity" href="#">Contact</a>
+</div>
+<div class="text-[#e1e2eb]/40">© 2024 Prabanja Chitra. Orbital Autonomy Initiative.</div>
+</div>
+</footer>
+</body></html>

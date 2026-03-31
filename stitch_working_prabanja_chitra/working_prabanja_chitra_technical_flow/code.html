@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Prabanja Chitra - Mission Control Working Flow</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "error": "#ffb4ab",
+              "secondary-fixed-dim": "#a0d0c6",
+              "surface-variant": "#32353c",
+              "on-tertiary-fixed-variant": "#7c2d11",
+              "on-surface": "#e1e2eb",
+              "on-error-container": "#ffdad6",
+              "on-primary": "#003731",
+              "secondary-container": "#21514a",
+              "outline": "#859490",
+              "on-secondary-fixed-variant": "#1f4e47",
+              "on-secondary": "#003731",
+              "primary-fixed": "#71f8e4",
+              "on-surface-variant": "#bbcac6",
+              "on-tertiary-container": "#6c2106",
+              "tertiary": "#ffb59e",
+              "outline-variant": "#3c4947",
+              "inverse-on-surface": "#2e3037",
+              "surface-container-lowest": "#0b0e14",
+              "surface-tint": "#4fdbc8",
+              "on-primary-fixed": "#00201c",
+              "primary-container": "#14b8a6",
+              "secondary-fixed": "#bbece2",
+              "on-secondary-fixed": "#00201c",
+              "on-tertiary": "#5e1800",
+              "error-container": "#93000a",
+              "secondary": "#a0d0c6",
+              "surface-container": "#1d2026",
+              "surface": "#10131a",
+              "primary": "#4fdbc8",
+              "on-secondary-container": "#92c2b8",
+              "inverse-primary": "#006b5f",
+              "surface-container-low": "#191c22",
+              "on-tertiary-fixed": "#3a0b00",
+              "on-background": "#e1e2eb",
+              "background": "#10131a",
+              "surface-container-highest": "#32353c",
+              "on-primary-container": "#00423b",
+              "inverse-surface": "#e1e2eb",
+              "surface-container-high": "#272a31",
+              "surface-bright": "#363940"
+            },
+            fontFamily: {
+              "headline": ["Inter"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .pipeline-connector {
+            position: relative;
+        }
+        .pipeline-connector::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -24px;
+            width: 24px;
+            height: 1px;
+            background: rgba(79, 219, 200, 0.2);
+            z-index: 0;
+        }
+        @media (max-width: 1024px) {
+            .pipeline-connector::after { display: none; }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary/30">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#1d2026]/80 backdrop-blur-xl border-b border-[#4fdbc8]/15 shadow-[0_24px_48px_rgba(0,0,0,0.4)]">
+<div class="flex justify-between items-center h-16 px-8 max-w-[1440px] mx-auto font-['Inter'] antialiased tracking-tight">
+<div class="text-xl font-semibold tracking-[-0.02em] text-[#e1e2eb]">Prabanja Chitra</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-[#e1e2eb]/70 hover:text-[#e1e2eb] transition-colors" href="#">Home</a>
+<a class="text-[#4fdbc8] border-b-2 border-[#4fdbc8] pb-1 font-bold" href="#">Working</a>
+<a class="text-[#e1e2eb]/70 hover:text-[#e1e2eb] transition-colors" href="#">Mission Control</a>
+<a class="text-[#e1e2eb]/70 hover:text-[#e1e2eb] transition-colors" href="#">Comparison</a>
+<a class="text-[#e1e2eb]/70 hover:text-[#e1e2eb] transition-colors" href="#">Metrics</a>
+<a class="text-[#e1e2eb]/70 hover:text-[#e1e2eb] transition-colors" href="#">Architecture</a>
+</div>
+<button class="bg-primary text-on-primary px-5 py-2 rounded-lg font-bold text-sm hover:bg-[#32353c] hover:text-primary transition-all duration-200 active:scale-95 duration-150">
+            Launch Dashboard
+        </button>
+</div>
+</nav>
+<main class="pt-32 pb-24 px-8 max-w-[1440px] mx-auto min-h-screen">
+<!-- Header Section -->
+<header class="mb-20">
+<div class="flex items-center gap-3 mb-4">
+<span class="w-2 h-6 bg-primary rounded-sm"></span>
+<span class="text-xs font-label uppercase tracking-[0.1em] text-primary">System Architecture</span>
+</div>
+<h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-on-surface mb-6 leading-tight">
+            Orbital Operational <br/><span class="text-primary-fixed-dim">Pipeline Flow</span>
+</h1>
+<p class="max-w-2xl text-on-surface-variant text-lg leading-relaxed">
+            Prabanja Chitra utilizes a deterministic autonomous loop to maintain satellite health and safety in high-density orbital regimes.
+        </p>
+</header>
+<!-- Pipeline Diagram -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
+<!-- Step 1 -->
+<div class="pipeline-connector group bg-surface-container p-6 rounded-xl border border-transparent hover:border-primary/20 transition-all duration-300">
+<div class="flex justify-between items-start mb-6">
+<div class="bg-surface-container-highest p-3 rounded-lg text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">sensors</span>
+</div>
+<span class="text-[0.6875rem] font-bold text-on-surface-variant tracking-widest opacity-30">01</span>
+</div>
+<h3 class="text-lg font-bold text-on-surface mb-2">Telemetry ingest</h3>
+<p class="text-sm text-on-surface-variant leading-snug">Real-time downlink of satellite health and position vector data.</p>
+</div>
+<!-- Step 2 -->
+<div class="pipeline-connector group bg-surface-container p-6 rounded-xl border border-transparent hover:border-primary/20 transition-all duration-300">
+<div class="flex justify-between items-start mb-6">
+<div class="bg-surface-container-highest p-3 rounded-lg text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">language</span>
+</div>
+<span class="text-[0.6875rem] font-bold text-on-surface-variant tracking-widest opacity-30">02</span>
+</div>
+<h3 class="text-lg font-bold text-on-surface mb-2">Orbital propagation</h3>
+<p class="text-sm text-on-surface-variant leading-snug">Predicting future orbital positions using orbital propagation.</p>
+</div>
+<!-- Step 3 -->
+<div class="pipeline-connector group bg-surface-container p-6 rounded-xl border border-transparent hover:border-primary/20 transition-all duration-300">
+<div class="flex justify-between items-start mb-6">
+<div class="bg-surface-container-highest p-3 rounded-lg text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">hub</span>
+</div>
+<span class="text-[0.6875rem] font-bold text-on-surface-variant tracking-widest opacity-30">03</span>
+</div>
+<h3 class="text-lg font-bold text-on-surface mb-2">Conjunction prediction</h3>
+<p class="text-sm text-on-surface-variant leading-snug">Identifying potential close approaches with space debris or other assets.</p>
+</div>
+<!-- Step 4 -->
+<div class="pipeline-connector group bg-surface-container p-6 rounded-xl border border-transparent hover:border-primary/20 transition-all duration-300">
+<div class="flex justify-between items-start mb-6">
+<div class="bg-surface-container-highest p-3 rounded-lg text-error">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">warning</span>
+</div>
+<span class="text-[0.6875rem] font-bold text-on-surface-variant tracking-widest opacity-30">04</span>
+</div>
+<h3 class="text-lg font-bold text-on-surface mb-2">Threat scoring</h3>
+<p class="text-sm text-on-surface-variant leading-snug">Threat scoring of collision and severity risk assessment.</p>
+</div>
+<!-- Step 5 -->
+<div class="pipeline-connector group bg-surface-container p-6 rounded-xl border border-transparent hover:border-primary/20 transition-all duration-300">
+<div class="flex justify-between items-start mb-6">
+<div class="bg-surface-container-highest p-3 rounded-lg text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">route</span>
+</div>
+<span class="text-[0.6875rem] font-bold text-on-surface-variant tracking-widest opacity-30">05</span>
+</div>
+<h3 class="text-lg font-bold text-on-surface mb-2">Maneuver planning</h3>
+<p class="text-sm text-on-surface-variant leading-snug">Maneuver planning calculation for collision avoidance.</p>
+</div>
+<!-- Step 6 -->
+<div class="pipeline-connector group bg-surface-container p-6 rounded-xl border border-transparent hover:border-primary/20 transition-all duration-300">
+<div class="flex justify-between items-start mb-6">
+<div class="bg-surface-container-highest p-3 rounded-lg text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">rocket_launch</span>
+</div>
+<span class="text-[0.6875rem] font-bold text-on-surface-variant tracking-widest opacity-30">06</span>
+</div>
+<h3 class="text-lg font-bold text-on-surface mb-2">Execution</h3>
+<p class="text-sm text-on-surface-variant leading-snug">Uploading flight commands to the onboard propulsion system.</p>
+</div>
+<!-- Step 7 -->
+<div class="pipeline-connector group bg-surface-container p-6 rounded-xl border border-transparent hover:border-primary/20 transition-all duration-300">
+<div class="flex justify-between items-start mb-6">
+<div class="bg-surface-container-highest p-3 rounded-lg text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">task_alt</span>
+</div>
+<span class="text-[0.6875rem] font-bold text-on-surface-variant tracking-widest opacity-30">07</span>
+</div>
+<h3 class="text-lg font-bold text-on-surface mb-2">Verification</h3>
+<p class="text-sm text-on-surface-variant leading-snug">Confirming delta-v success through post-maneuver tracking.</p>
+</div>
+<!-- Step 8 -->
+<div class="group bg-surface-container p-6 rounded-xl border border-transparent hover:border-primary/20 transition-all duration-300">
+<div class="flex justify-between items-start mb-6">
+<div class="bg-surface-container-highest p-3 rounded-lg text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">auto_mode</span>
+</div>
+<span class="text-[0.6875rem] font-bold text-on-surface-variant tracking-widest opacity-30">08</span>
+</div>
+<h3 class="text-lg font-bold text-on-surface mb-2">Recovery</h3>
+<p class="text-sm text-on-surface-variant leading-snug">Resuming standard mission operations and payload utility.</p>
+</div>
+</section>
+<!-- Autonomous Loop Section -->
+<section class="mt-40 bg-surface-container-lowest rounded-xl p-12 border border-outline-variant/10">
+<div class="grid lg:grid-cols-2 gap-16 items-center">
+<div>
+<h2 class="text-3xl font-bold mb-6">How the loop stays autonomous</h2>
+<p class="text-on-surface-variant leading-relaxed mb-8">
+                    The Prabanja Chitra core utilizes an OODA-inspired logic gate. Every maneuver is fed back into the propellant tracking and orbit estimation modules, creating a self-healing operational loop that requires autonomous nominal operation for safety events.
+                </p>
+<ul class="space-y-6">
+<li class="flex gap-4">
+<span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+<div>
+<span class="block font-bold">Closed-Loop Validation</span>
+<span class="text-sm text-on-surface-variant">Continuous sensor fusion corrects propagation errors in real-time.</span>
+</div>
+</li>
+<li class="flex gap-4">
+<span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+<div>
+<span class="block font-bold">Predictive Recalibration</span>
+<span class="text-sm text-on-surface-variant">Dynamic threat models evolve based on historical atmospheric drag data.</span>
+</div>
+</li>
+</ul>
+<div class="mt-12 pt-8 border-t border-outline-variant/10">
+<p class="text-[0.6875rem] uppercase tracking-widest text-on-surface-variant/60 italic">Decision loop remains active until orbit returns to nominal.</p>
+</div>
+</div>
+<!-- Circular Loop Diagram -->
+<div class="relative flex items-center justify-center p-8">
+<div class="absolute inset-0 bg-primary/5 blur-3xl rounded-full"></div>
+<div class="relative w-full max-w-md aspect-square rounded-full border border-primary/20 flex items-center justify-center">
+<div class="absolute inset-4 rounded-full border border-primary/10 border-dashed animate-[spin_60s_linear_infinite]"></div>
+<div class="text-center z-10 p-10 bg-surface/80 backdrop-blur-md rounded-full border border-primary/20 w-48 h-48 flex flex-col justify-center items-center shadow-xl">
+<span class="material-symbols-outlined text-primary text-4xl mb-2">verified_user</span>
+<span class="text-xs font-label tracking-widest uppercase">Sentinel-V Core</span>
+</div>
+<!-- Nodes -->
+<div class="absolute top-0 -translate-y-1/2 bg-surface-container p-3 rounded-lg border border-primary/40 shadow-lg">
+<span class="material-symbols-outlined text-primary">visibility</span>
+</div>
+<div class="absolute right-0 translate-x-1/2 bg-surface-container p-3 rounded-lg border border-primary/40 shadow-lg">
+<span class="material-symbols-outlined text-primary">psychology</span>
+</div>
+<div class="absolute bottom-0 translate-y-1/2 bg-surface-container p-3 rounded-lg border border-primary/40 shadow-lg">
+<span class="material-symbols-outlined text-primary">precision_manufacturing</span>
+</div>
+<div class="absolute left-0 -translate-x-1/2 bg-surface-container p-3 rounded-lg border border-primary/40 shadow-lg">
+<span class="material-symbols-outlined text-primary">update</span>
+</div>
+<!-- Arc Labels -->
+<span class="absolute top-12 right-12 text-[10px] font-bold text-on-surface-variant uppercase tracking-tighter -rotate-45">Evaluate</span>
+<span class="absolute bottom-12 right-12 text-[10px] font-bold text-on-surface-variant uppercase tracking-tighter rotate-45">Actuate</span>
+<span class="absolute bottom-12 left-12 text-[10px] font-bold text-on-surface-variant uppercase tracking-tighter -rotate-45">Verify</span>
+<span class="absolute top-12 left-12 text-[10px] font-bold text-on-surface-variant uppercase tracking-tighter rotate-45">Observe</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#0b0e14] w-full py-12 border-t border-[#4fdbc8]/10">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 max-w-[1440px] mx-auto gap-8 text-[0.6875rem] uppercase tracking-[0.05em] font-['Inter']">
+<div class="text-lg font-bold text-[#e1e2eb]">Prabanja Chitra</div>
+<div class="text-[#e1e2eb]/40">
+            © 2024 Prabanja Chitra. Orbital Autonomy Initiative.
+        </div>
+<div class="flex gap-8">
+<a class="text-[#e1e2eb]/40 hover:text-[#4fdbc8] transition-opacity" href="#">Documentation</a>
+<a class="text-[#e1e2eb]/40 hover:text-[#4fdbc8] transition-opacity" href="#">Mission Logs</a>
+<a class="text-[#e1e2eb]/40 hover:text-[#4fdbc8] transition-opacity" href="#">Privacy</a>
+<a class="text-[#e1e2eb]/40 hover:text-[#4fdbc8] transition-opacity" href="#">Contact</a>
+</div>
+</div>
+</footer>
+</body></html>
