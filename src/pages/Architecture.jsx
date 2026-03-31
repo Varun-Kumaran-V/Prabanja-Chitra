@@ -49,11 +49,11 @@ export default function Architecture() {
   ], []);
 
   return (
-    <PageLayout className="px-6 md:px-12 pb-24">
+    <PageLayout className="px-8 md:px-12 pb-24">
       {/* Header */}
       <div className="text-center mb-16 animate-fadeInUp">
         <span className="text-[0.6875rem] uppercase tracking-[0.2em] text-[#4fdbc8] font-bold">System Design</span>
-        <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight mt-4 mb-6">
+        <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight mt-4 mb-10">
           System Architecture
         </h1>
         <p className="text-xl text-[#bbcac6] max-w-3xl mx-auto leading-relaxed">
@@ -131,13 +131,13 @@ export default function Architecture() {
 
         {/* Data Flow Summary */}
         <Card padding="large" className="mb-12 animate-fadeInUp delay-700">
-          <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
+          <h3 className="text-2xl font-bold mb-10 flex items-center gap-3">
             <span className="material-symbols-outlined text-[#4fdbc8] text-4xl">swap_vert</span>
             Data Flow
           </h3>
           <div className="space-y-4">
             {dataFlowSteps.map((flow) => (
-              <div key={flow.step} className="flex items-start gap-4 group">
+              <div key={flow.step} className="flex items-start gap-6 group">
                 <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#4fdbc8]/10 flex items-center justify-center text-[#4fdbc8] font-bold text-sm group-hover:bg-[#4fdbc8]/20 transition-colors">
                   {flow.step}
                 </div>
@@ -152,7 +152,7 @@ export default function Architecture() {
 
         {/* Tech Stack */}
         <Card padding="large" className="border-l-4 border-[#4fdbc8] bg-gradient-to-r from-[#4fdbc8]/5 to-transparent animate-fadeInUp delay-800">
-          <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
+          <h3 className="text-xl font-bold mb-10 flex items-center gap-2">
             <span className="material-symbols-outlined text-[#4fdbc8]">code</span>
             Technology Stack
           </h3>
@@ -173,7 +173,7 @@ export default function Architecture() {
         <p className="text-[#bbcac6] mb-8 text-lg">
           See how these components work together in real-time
         </p>
-        <div className="flex gap-4 justify-center">
+        <div className="flex gap-6 justify-center">
           <Link to="/comparison" className="btn-secondary px-8 py-4">
             View Comparison
           </Link>

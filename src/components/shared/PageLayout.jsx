@@ -16,7 +16,7 @@ export default function PageLayout({
     <div className="min-h-screen bg-[#10131a] text-[#e1e2eb] antialiased selection:bg-[#4fdbc8] selection:text-[#003731]">
       <Navbar />
       
-      <main className={`pt-24 pb-12 ${maxWidth ? 'max-w-[1440px] mx-auto' : ''} ${className}`}>
+      <main className={`pt-24 pb-12 ${maxWidth ? 'max-w-[1200px] mx-auto' : ''} ${className}`}>
         {children}
       </main>
 

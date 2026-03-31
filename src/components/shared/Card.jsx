@@ -16,9 +16,9 @@ export const Card = memo(function Card({
 }) {
   const variants = {
     default: 'bg-[#1a1d26] border-[#2a2f3a]',
-    elevated: 'bg-[#1d2026] border-[#2a2f3a]',
-    dark: 'bg-[#0b0e14] border-[#3c4947]/15',
-    glass: 'bg-[#1d2026]/60 backdrop-blur-xl border-[#4fdbc8]/15',
+    elevated: 'bg-[#1f2430] border-[#3a3f4a] shadow-xl',
+    dark: 'bg-[#0b0e14] border-[#3c4947]/20',
+    glass: 'bg-[#1d2026]/60 backdrop-blur-xl border-[#4fdbc8]/20',
   };
 
   const paddings = {
@@ -30,7 +30,7 @@ export const Card = memo(function Card({
   };
 
   const hoverClass = hover 
-    ? 'hover:shadow-xl hover:border-[#3a3f4a] transition-all duration-300' 
+    ? 'hover:shadow-xl hover:border-[#3a3f4a] hover:scale-[1.02] transition-all duration-300' 
     : '';
 
   const glowClass = glow 

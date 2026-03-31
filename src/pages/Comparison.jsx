@@ -118,11 +118,11 @@ export default function Comparison() {
   ], []);
 
   return (
-    <PageLayout className="px-6 md:px-12 pb-24">
+    <PageLayout className="px-8 md:px-12 pb-24">
       {/* Header */}
       <div className="text-center mb-16 animate-fadeInUp">
         <span className="text-[0.6875rem] uppercase tracking-[0.2em] text-[#4fdbc8] font-bold">System Comparison</span>
-        <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight mt-4 mb-6">
+        <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight mt-4 mb-10">
           Manual vs Autonomous
         </h1>
         <p className="text-xl text-[#bbcac6] max-w-3xl mx-auto leading-relaxed">
@@ -184,7 +184,7 @@ export default function Comparison() {
             className="overflow-hidden animate-fadeInUp"
             style={{ animationDelay: `${(idx + 3) * 100}ms` }}
           >
-            <div className="bg-[#191c22] px-6 py-4 border-b border-[#3c4947]/20">
+            <div className="bg-[#191c22] px-8 py-4 border-b border-[#3c4947]/20">
               <h3 className="text-xl font-bold">{item.metric}</h3>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-[#3c4947]/20">
@@ -230,7 +230,7 @@ export default function Comparison() {
       <Card variant="elevated" padding="none" className="relative overflow-hidden border-2 border-[#4fdbc8]/20 animate-fadeInUp delay-600">
         <div className="absolute top-0 right-0 w-96 h-96 bg-[#4fdbc8]/5 blur-[120px] rounded-full" />
         <div className="relative p-10">
-          <div className="flex items-center gap-4 mb-8">
+          <div className="flex items-center gap-6 mb-8">
             <span className="material-symbols-outlined text-[#4fdbc8] text-5xl">insights</span>
             <h2 className="text-4xl font-bold">The Verdict</h2>
           </div>
@@ -255,7 +255,7 @@ export default function Comparison() {
 
             <div>
               <h3 className="text-xl font-semibold text-[#4fdbc8] mb-4">Key Metrics</h3>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-6">
                 {[
                   { value: '180x', label: 'Faster Response' },
                   { value: '100x', label: 'More Scalable' },
@@ -289,7 +289,7 @@ export default function Comparison() {
           See the autonomous collision avoidance system in action. Watch real-time conjunction detection,
           threat scoring, and automated maneuver planning.
         </p>
-        <div className="flex gap-4 justify-center">
+        <div className="flex gap-6 justify-center">
           <Link to="/architecture" className="btn-secondary px-8 py-4">
             View Architecture
           </Link>

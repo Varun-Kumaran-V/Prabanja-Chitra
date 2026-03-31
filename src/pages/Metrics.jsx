@@ -74,7 +74,7 @@ export default function Metrics() {
   const totalConjunctions = metrics.eventsByType?.conjunction_detected || 0;
 
   return (
-    <PageLayout className="px-6 md:px-8 pb-20 space-y-8">
+    <PageLayout className="px-8 md:px-8 pb-20 space-y-8">
       {/* Page Header */}
       <SectionHeader
         label="Live Operations"
@@ -93,7 +93,7 @@ export default function Metrics() {
             title="Active Satellites"
             value={metrics.satelliteCount}
             subtitle="Operational constellation"
-            icon="🛰️"
+            icon={<span className="material-symbols-outlined text-4xl">satellite</span>}
             accentColor="#4fdbc8"
           />
           <StatCard
@@ -107,7 +107,7 @@ export default function Metrics() {
             title="Fleet Fuel"
             value={`${Math.round(metrics.fuelRemaining * 100)}%`}
             subtitle="Constellation remaining"
-            icon="⛽"
+            icon={<span className="material-symbols-outlined text-4xl">local_gas_station</span>}
             accentColor="#a0d0c6"
           />
         </div>
@@ -175,7 +175,7 @@ export default function Metrics() {
                                    sat?.fuel_status === 'LOW' ? '#ffb59e' : '#4fdbc8';
 
                 return (
-                  <div key={idx} className="flex items-center gap-4 p-3 rounded-lg bg-[#10131a]/50 hover:bg-[#10131a] transition-colors">
+                  <div key={idx} className="flex items-center gap-6 p-3 rounded-lg bg-[#10131a]/50 hover:bg-[#10131a] transition-colors">
                     <div
                       className="w-2.5 h-2.5 rounded-full flex-shrink-0"
                       style={{ background: statusColor, boxShadow: `0 0 10px ${statusColor}88` }}
@@ -207,21 +207,21 @@ export default function Metrics() {
             title="Total Events"
             value={metrics.totalEvents}
             subtitle="Mission log entries"
-            icon="📋"
+            icon={<span className="material-symbols-outlined text-4xl">list_alt</span>}
             accentColor="#4fdbc8"
           />
           <StatCard
             title="Total Maneuvers"
             value={totalManeuvers}
             subtitle="Executed burns"
-            icon="🚀"
+            icon={<span className="material-symbols-outlined inline-block align-middle">rocket_launch</span>}
             accentColor="#4fdbc8"
           />
           <StatCard
             title="Conjunctions"
             value={totalConjunctions}
             subtitle="Detected approaches"
-            icon="⚠️"
+            icon={<span className="material-symbols-outlined text-4xl">error</span>}
             accentColor="#ffb59e"
           />
         </div>
@@ -232,15 +232,15 @@ export default function Metrics() {
         <div className="absolute inset-0 gradient-radial-accent opacity-30" />
         <div className="absolute inset-0 flex flex-col items-center justify-center p-8">
           <h3 className="text-2xl font-bold text-[#e1e2eb] mb-2">Constellation Operations</h3>
-          <p className="text-[#bbcac6] text-sm mb-6 max-w-xl text-center leading-relaxed">
+          <p className="text-[#bbcac6] text-sm mb-10 max-w-xl text-center leading-relaxed">
             Managing {metrics.satelliteCount} active satellites with real-time tracking of {metrics.debrisCount} debris objects.
             Autonomous collision avoidance system operational.
           </p>
-          <div className="flex gap-4">
-            <Link to="/mission-control" className="btn-secondary px-6 py-2.5 text-xs font-bold uppercase tracking-widest">
+          <div className="flex gap-6">
+            <Link to="/mission-control" className="btn-secondary px-8 py-2.5 text-xs font-bold uppercase tracking-widest">
               View Operations
             </Link>
-            <Link to="/dashboard" className="btn-primary px-6 py-2.5 text-xs font-bold uppercase tracking-widest">
+            <Link to="/dashboard" className="btn-primary px-8 py-2.5 text-xs font-bold uppercase tracking-widest">
               Launch Dashboard
             </Link>
           </div>
@@ -263,7 +263,7 @@ function MetricNumber({ label, value, color = '#e1e2eb' }) {
 // Metrics Skeleton Component
 function MetricsSkeleton() {
   return (
-    <PageLayout className="px-6 md:px-8 pb-20 space-y-8">
+    <PageLayout className="px-8 md:px-8 pb-20 space-y-8">
       <div className="flex justify-between items-end">
         <div>
           <Skeleton className="h-4 w-24 mb-2" />

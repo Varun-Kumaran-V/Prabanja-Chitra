@@ -149,9 +149,9 @@ export default function MissionControl() {
   }
 
   return (
-    <PageLayout showFooter={false} className="px-6 md:px-8">
+    <PageLayout showFooter={false} className="px-8 md:px-8">
       {/* Compact Status Strip */}
-      <div className="grid grid-cols-2 md:grid-cols-6 gap-3 mb-6 animate-fadeInUp">
+      <div className="grid grid-cols-2 md:grid-cols-6 gap-3 mb-10 animate-fadeInUp">
         <StatusCard 
           label="System Mode" 
           value={computedData.systemMode} 
@@ -169,12 +169,12 @@ export default function MissionControl() {
       </div>
 
       {/* Live Activity Sections */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 animate-fadeInUp">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 animate-fadeInUp">
         {/* Live Alert Section */}
-        <Card padding="normal" className="bg-gradient-to-br from-[#1a1d26] to-[#1a1d26] border-[#ffb4ab]/30">
+        <Card padding="normal" className="bg-gradient-to-br from-[#1a1d26] to-[#1a1d26] border-[#ffb4ab]/40 shadow-[0_0_30px_rgba(255,180,171,0.15)] glow-error">
           <div className="flex items-center justify-between mb-3">
             <h3 className="text-xs uppercase tracking-[0.05em] font-bold text-[#ffb4ab] flex items-center gap-2">
-              <span className="animate-pulse">🚨</span>
+              <span className="animate-pulse"><span className="material-symbols-outlined">warning</span></span>
               LIVE ALERT
             </h3>
           </div>
@@ -183,27 +183,27 @@ export default function MissionControl() {
               <div className="flex justify-between items-start">
                 <div>
                   <div className="text-[0.65rem] text-[#bbcac6]">Primary</div>
-                  <div className="text-sm font-bold text-[#ffb4ab]">
+                  <div className="text-lg font-bold text-[#ffb4ab] drop-shadow-md">
                     {data.conjunctions.conjunctions[0].satellite_id}
                   </div>
                 </div>
                 <div className="text-right">
                   <div className="text-[0.65rem] text-[#bbcac6]">Secondary</div>
-                  <div className="text-sm font-bold text-[#e1e2eb]">
+                  <div className="text-lg font-bold text-[#e1e2eb] drop-shadow-md">
                     {data.conjunctions.conjunctions[0].secondary_id}
                   </div>
                 </div>
               </div>
-              <div className="pt-2 border-t border-[#ffb4ab]/20">
-                <div className="flex justify-between text-[0.7rem]">
-                  <span className="text-[#bbcac6]">Time to TCA:</span>
-                  <span className="font-mono text-[#e1e2eb] font-semibold">
+              <div className="pt-3 border-t border-[#ffb4ab]/20">
+                <div className="flex justify-between items-end">
+                  <span className="text-xs text-[#bbcac6]">Time to TCA:</span>
+                  <span className="font-mono text-2xl text-[#e1e2eb] font-bold drop-shadow-lg">
                     {formatTimeToTCA(data.conjunctions.conjunctions[0].time_to_tca)}
                   </span>
                 </div>
-                <div className="flex justify-between text-[0.7rem] mt-1">
-                  <span className="text-[#bbcac6]">Miss Distance:</span>
-                  <span className="font-mono text-[#ffb4ab] font-semibold">
+                <div className="flex justify-between items-end mt-2">
+                  <span className="text-xs text-[#bbcac6]">Miss Distance:</span>
+                  <span className="font-mono text-2xl text-[#ffb4ab] font-bold drop-shadow-[0_0_10px_rgba(255,180,171,0.4)]">
                     {formatMissDistance(data.conjunctions.conjunctions[0].predicted_miss_distance_m)}
                   </span>
                 </div>
@@ -211,24 +211,24 @@ export default function MissionControl() {
             </div>
           ) : (
             <div className="text-center py-4">
-              <div className="text-[#4fdbc8] text-xl mb-1">✓</div>
+              <div className="text-[#4fdbc8] text-xl mb-1"><span className="material-symbols-outlined">check_circle</span></div>
               <div className="text-[0.7rem] text-[#bbcac6]">No Active Threats</div>
             </div>
           )}
         </Card>
 
         {/* Last Decision Section */}
-        <Card padding="normal">
+        <Card padding="normal" className="shadow-[0_0_20px_rgba(79,219,200,0.1)] border-t-[#4fdbc8]/30">
           <div className="flex items-center justify-between mb-3">
             <h3 className="text-xs uppercase tracking-[0.05em] font-bold text-[#e1e2eb] flex items-center gap-2">
-              🧠 LAST DECISION
+              <span className="material-symbols-outlined inline-block align-middle">insights</span> LAST DECISION
             </h3>
           </div>
           {decisions[0] ? (
             <div className="space-y-2">
               <div className="flex items-center gap-2 mb-2">
                 <div 
-                  className="px-2 py-1 rounded text-[0.65rem] font-bold uppercase"
+                  className="px-2 py-1 rounded text-[0.65rem] font-bold uppercase shadow-sm"
                   style={{
                     backgroundColor: getDecisionColor(decisions[0]).bg,
                     color: getDecisionColor(decisions[0]).text
@@ -236,7 +236,7 @@ export default function MissionControl() {
                 >
                   {decisions[0].maneuver_planned ? 'MANEUVER' : decisions[0].deferred_reason ? 'DEFERRED' : 'SKIPPED'}
                 </div>
-                <span className="text-sm font-bold text-[#e1e2eb]">
+                <span className="text-base font-bold text-[#e1e2eb] drop-shadow-sm">
                   {decisions[0].satellite_id}
                 </span>
               </div>
@@ -246,17 +246,17 @@ export default function MissionControl() {
             </div>
           ) : (
             <div className="text-center py-4">
-              <div className="text-[#bbcac6] text-xl mb-1">⏳</div>
+              <div className="text-[#bbcac6] text-xl mb-1"><span className="material-symbols-outlined inline-block align-middle">hourglass_empty</span></div>
               <div className="text-[0.7rem] text-[#bbcac6]">No Decisions Yet</div>
             </div>
           )}
         </Card>
 
         {/* Last Maneuver Section */}
-        <Card padding="normal">
+        <Card padding="normal" className="opacity-60 hover:opacity-100 transition-opacity">
           <div className="flex items-center justify-between mb-3">
             <h3 className="text-xs uppercase tracking-[0.05em] font-bold text-[#e1e2eb] flex items-center gap-2">
-              🚀 LAST MANEUVER
+              <span className="material-symbols-outlined inline-block align-middle">rocket_launch</span> LAST MANEUVER
             </h3>
           </div>
           {computedData.maneuvers[0] ? (
@@ -292,7 +292,7 @@ export default function MissionControl() {
             </div>
           ) : (
             <div className="text-center py-4">
-              <div className="text-[#bbcac6] text-xl mb-1">📋</div>
+              <div className="text-[#bbcac6] text-xl mb-1"><span className="material-symbols-outlined">list_alt</span></div>
               <div className="text-[0.7rem] text-[#bbcac6]">No Maneuvers Scheduled</div>
             </div>
           )}
@@ -307,7 +307,7 @@ export default function MissionControl() {
           <Card padding="normal" className="flex flex-col">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-xs uppercase tracking-[0.05em] font-bold text-[#e1e2eb] flex items-center gap-2">
-                <span className="text-[#ffb4ab]">⚠</span>
+                <span className="text-[#ffb4ab]"><span className="material-symbols-outlined">warning</span></span>
                 Active Threats
               </h2>
               <span className="text-[0.65rem] text-[#bbcac6] font-mono">
@@ -327,7 +327,7 @@ export default function MissionControl() {
                 ))
               ) : (
                 <EmptyState 
-                  icon="✓" 
+                  icon={<span className="material-symbols-outlined text-4xl">check_circle</span>} 
                   title="All Clear" 
                   description="No active threats detected"
                 />
@@ -336,7 +336,7 @@ export default function MissionControl() {
           </Card>
 
           {/* Unprotected Satellites */}
-          <Card padding="normal">
+          <Card padding="normal" className="opacity-60 hover:opacity-100 transition-opacity">
             <h2 className="text-xs uppercase tracking-[0.05em] font-bold text-[#e1e2eb] mb-4">
               Unprotected Assets
             </h2>
@@ -350,7 +350,7 @@ export default function MissionControl() {
                 ))
               ) : (
                 <div className="text-[0.6875rem] text-[#4fdbc8] text-center py-3">
-                  ✓ All satellites protected
+                  <span className="material-symbols-outlined inline-block align-middle text-sm mr-1">check_circle</span> All satellites protected
                 </div>
               )}
             </div>
@@ -398,7 +398,7 @@ export default function MissionControl() {
             {decisionExplanation && (
               <div className="absolute bottom-5 left-5 max-w-xs glass-panel p-4 rounded-xl z-10 animate-scaleIn">
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="text-[#4fdbc8]">🧠</span>
+                  <span className="text-[#4fdbc8]"><span className="material-symbols-outlined inline-block align-middle">insights</span></span>
                   <span className="text-[0.6875rem] font-bold text-[#4fdbc8] uppercase">
                     Autonomous Decision
                   </span>
@@ -450,12 +450,12 @@ export default function MissionControl() {
         </main>
 
         {/* RIGHT COLUMN: Metrics & Logs */}
-        <aside className="lg:col-span-3 flex flex-col gap-5 animate-slideInRight">
+        <aside className="lg:col-span-3 flex flex-col gap-6 animate-slideInRight">
           {/* Fuel Status */}
-          <Card padding="normal">
+          <Card padding="normal" className="opacity-60 hover:opacity-100 transition-opacity">
             <div className="flex justify-between items-center mb-3">
               <span className="text-xs uppercase font-bold text-[#6c7086]">Fleet Fuel Status</span>
-              <span className="text-[#4fdbc8] text-lg">⛽</span>
+              <span className="text-[#4fdbc8] text-lg"><span className="material-symbols-outlined">local_gas_station</span></span>
             </div>
             <div className="flex items-end gap-2 mb-3">
               <span className="text-3xl font-bold text-[#e1e2eb] metric-value">{computedData.fuelPct}%</span>
@@ -556,7 +556,7 @@ function StatusCard({ label, value, accent = false, critical = false, fuel = fal
       <span className="text-[0.6875rem] uppercase tracking-[0.05em] text-[#6c7086] block mb-1">
         {label}
       </span>
-      <span className={`text-xl font-bold ${colorClass} metric-value`}>{value}</span>
+      <span className={`text-2xl md:text-3xl font-extrabold ${colorClass} metric-value drop-shadow-lg`}>{value}</span>
     </div>
   );
 }
@@ -627,7 +627,7 @@ function ManeuverTimeline({ maneuvers = [], sequences = [] }) {
     acc + (s?.evasion_maneuver ? 1 : 0) + (s?.recovery_maneuver ? 1 : 0), 0);
 
   return (
-    <Card padding="normal">
+    <Card padding="normal" className="opacity-60 hover:opacity-100 transition-opacity">
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-xs uppercase tracking-[0.05em] font-bold text-[#e1e2eb]">
           Planned Maneuvers
@@ -676,7 +676,7 @@ function ManeuverTimeline({ maneuvers = [], sequences = [] }) {
         </div>
       ) : (
         <EmptyState 
-          icon="📅" 
+          icon={<span className="material-symbols-outlined text-4xl">calendar_month</span>} 
           title="No maneuvers scheduled" 
           description="The system will plan maneuvers as needed"
         />
@@ -692,7 +692,7 @@ function FuelStatusPanel({ satellites = [] }) {
   [satellites]);
 
   return (
-    <Card padding="normal">
+    <Card padding="normal" className="opacity-60 hover:opacity-100 transition-opacity">
       <h3 className="text-xs uppercase tracking-[0.05em] font-bold text-[#e1e2eb] mb-4">
         Per-Satellite Fuel
       </h3>
@@ -748,18 +748,20 @@ function EventLog({ events = [] }) {
           recentEvents.map((event, idx) => (
             <div 
               key={event?.id || idx} 
-              className="py-2 border-b border-[#3c4947]/10 last:border-0"
+              className="py-3 border-b border-[#3c4947]/20 last:border-0 animate-fadeInUp"
+              style={{ animationDelay: `${idx * 150}ms`, opacity: 0, animationFillMode: 'forwards' }}
             >
-              <div className="text-[0.7rem] font-semibold text-[#4fdbc8] mb-0.5">
-                {event?.event_type || 'unknown'}
+              <div className="text-xs font-mono font-semibold text-[#4fdbc8] mb-1 flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#4fdbc8] animate-pulse"></span>
+                &gt; {event?.event_type || 'system_event'}
               </div>
-              <div className="text-[0.65rem] text-[#bbcac6] leading-relaxed line-clamp-2">
+              <div className="text-xs text-[#e1e2eb] leading-relaxed pl-3 border-l border-[#4fdbc8]/20">
                 {event?.message || 'No message'}
               </div>
             </div>
           ))
         ) : (
-          <EmptyState icon="📋" title="No events yet" />
+          <EmptyState icon={<span className="material-symbols-outlined text-4xl">list_alt</span>} title="No events yet" />
         )}
       </div>
     </Card>
@@ -778,9 +780,9 @@ function DecisionLogPanel({ decisions = [], decisionStats = {} }) {
   const skipped = decisionStats?.threats_skipped || 0;
 
   const decisionTypeColors = {
-    maneuver_scheduled: { bg: '#4fdbc8', text: '#003731', icon: '✓' },
-    deferred: { bg: '#ffb59e', text: '#1a1d26', icon: '⏸' },
-    skipped: { bg: '#bbcac6', text: '#1a1d26', icon: '⊘' },
+    maneuver_scheduled: { bg: '#4fdbc8', text: '#003731', icon: <span className="material-symbols-outlined">check_circle</span> },
+    deferred: { bg: '#ffb59e', text: '#1a1d26', icon: <span className="material-symbols-outlined">pause_circle</span> },
+    skipped: { bg: '#bbcac6', text: '#1a1d26', icon: <span className="material-symbols-outlined">cancel</span> },
   };
 
   return (
@@ -789,7 +791,7 @@ function DecisionLogPanel({ decisions = [], decisionStats = {} }) {
         <h3 className="text-xs uppercase tracking-[0.05em] font-bold text-[#e1e2eb]">
           Decision Intelligence
         </h3>
-        <span className="text-[#4fdbc8] text-lg">🧠</span>
+        <span className="text-[#4fdbc8] text-lg"><span className="material-symbols-outlined inline-block align-middle">insights</span></span>
       </div>
 
       {/* Decision Statistics */}
@@ -821,8 +823,8 @@ function DecisionLogPanel({ decisions = [], decisionStats = {} }) {
             return (
               <div
                 key={decision?.decision_id || idx}
-                className="bg-[#0b0e14] p-2 rounded-lg border-l-2"
-                style={{ borderColor: colors.bg }}
+                className="bg-[#0b0e14] p-3 rounded-lg border-l-2 shadow-md animate-slideInRight"
+                style={{ borderColor: colors.bg, animationDelay: `${idx * 100}ms`, opacity: 0, animationFillMode: 'forwards' }}
               >
                 <div className="flex items-start justify-between mb-1">
                   <div className="flex items-center gap-2">

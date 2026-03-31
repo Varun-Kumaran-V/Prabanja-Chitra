@@ -14,7 +14,7 @@ export default function Navbar() {
 
   return (
     <nav className="fixed top-0 w-full z-50 bg-[#1d2026]/80 backdrop-blur-xl border-b border-[#4fdbc8]/15 shadow-[0_24px_48px_rgba(0,0,0,0.4)]">
-      <div className="flex justify-between items-center h-16 px-6 md:px-8 max-w-[1440px] mx-auto">
+      <div className="flex justify-between items-center h-16 px-8 md:px-10 max-w-[1200px] mx-auto">
         {/* Logo */}
         <Link 
           to="/home" 
@@ -32,14 +32,14 @@ export default function Navbar() {
                 key={link.path}
                 to={link.path}
                 className={`
-                  px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200
+                  px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 active:scale-95
                   ${isActive 
-                    ? 'text-[#4fdbc8] bg-[#4fdbc8]/10' 
+                    ? 'text-[#4fdbc8] bg-[#4fdbc8]/10 border-b-2 border-[#4fdbc8]' 
                     : 'text-[#e1e2eb]/70 hover:text-[#e1e2eb] hover:bg-[#272a31]'
                   }
                 `}
               >
-                {link.label}
+                  {link.label}
               </Link>
             );
           })}

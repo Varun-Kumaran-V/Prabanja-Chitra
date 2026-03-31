@@ -1,0 +1,32 @@
+
+> aether-constellation-manager@1.0.0 build
+> vite build
+
+The CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.
+[36mvite v5.4.21 [32mbuilding for production...[36m[39m
+transforming...
+[32mÔ£ô[39m 20 modules transformed.
+x Build failed in 632ms
+error during build:
+[vite:esbuild] Transform failed with 1 error:
+C:/Users/varun/aether-constellation-manager/src/pages/Metrics.jsx:217:86: ERROR: Expected ">" but found "\">rocket_launch</span>\""
+file: C:/Users/varun/aether-constellation-manager/src/pages/Metrics.jsx:217:86
+
+Expected ">" but found "\">rocket_launch</span>\""
+215|              value={totalManeuvers}
+216|              subtitle="Executed burns"
+217|              icon="<span className="material-symbols-outlined inline-block align-middle">rocket_launch</span>"
+   |                                                                                        ^
+218|              accentColor="#4fdbc8"
+219|            />
+
+    at failureErrorWithLog (C:\Users\varun\aether-constellation-manager\node_modules\esbuild\lib\main.js:1472:15)
+    at C:\Users\varun\aether-constellation-manager\node_modules\esbuild\lib\main.js:755:50
+    at responseCallbacks.<computed> (C:\Users\varun\aether-constellation-manager\node_modules\esbuild\lib\main.js:622:9)
+    at handleIncomingPacket (C:\Users\varun\aether-constellation-manager\node_modules\esbuild\lib\main.js:677:12)
+    at Socket.readFromStdout (C:\Users\varun\aether-constellation-manager\node_modules\esbuild\lib\main.js:600:7)
+    at Socket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at Pipe.onStreamRead (node:internal/stream_base_commons:189:23)

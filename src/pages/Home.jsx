@@ -112,7 +112,7 @@ export default function Home() {
         <div className="relative z-20 max-w-[1440px] mx-auto w-full px-8">
           <div className="max-w-3xl mx-auto text-center animate-fadeInUp">
             {/* Status Bar */}
-            <div className="flex items-center justify-center gap-4 mb-6 text-xs font-mono">
+            <div className="flex items-center justify-center gap-6 mb-10 text-xs font-mono">
               <span className="text-[#4fdbc8]/60">LAST UPDATE: {data.lastUpdateTime}</span>
               <span className="w-1.5 h-1.5 rounded-full bg-[#4fdbc8] animate-pulse" />
               <StatusBadge status={data.systemMode} pulse={true} />
@@ -122,7 +122,7 @@ export default function Home() {
             <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-[#e1e2eb] mb-4">
               <span className="text-gradient">Prabanja Chitra</span>
             </h1>
-            <p className="text-xl md:text-2xl font-semibold text-[#4fdbc8] mb-6">
+            <p className="text-xl md:text-2xl font-semibold text-[#4fdbc8] mb-10">
               India's Autonomous Satellite Safety Command
             </p>
 
@@ -145,7 +145,7 @@ export default function Home() {
             </p>
 
             {/* Stats Cards */}
-            <div className="grid grid-cols-3 gap-4 max-w-2xl mx-auto mb-12 animate-fadeInUp delay-200">
+            <div className="grid grid-cols-3 gap-6 max-w-2xl mx-auto mb-12 animate-fadeInUp delay-200">
               <HeroStatCard 
                 label="Active Satellites" 
                 value={data.activeSatellites} 
@@ -165,7 +165,7 @@ export default function Home() {
             </div>
 
             {/* CTA Buttons */}
-            <div className="flex gap-4 justify-center animate-fadeInUp delay-300">
+            <div className="flex gap-6 justify-center animate-fadeInUp delay-300">
               <Link 
                 to="/architecture" 
                 className="btn-secondary px-8 py-4 text-sm"
@@ -221,7 +221,7 @@ export default function Home() {
 
       {/* Core Operational Vectors */}
       <section className="py-24 px-8 max-w-[1440px] mx-auto">
-        <div className="flex items-center gap-4 mb-12">
+        <div className="flex items-center gap-6 mb-12">
           <div className="w-1 h-8 bg-[#4fdbc8] rounded-full" />
           <h2 className="text-2xl font-bold text-[#e1e2eb]">Core Operational Vectors</h2>
         </div>
@@ -272,7 +272,7 @@ export default function Home() {
         <div className="max-w-[1440px] mx-auto px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="animate-fadeInUp">
-              <h2 className="text-3xl font-bold mb-6 text-[#e1e2eb]">Operational Safety Layer</h2>
+              <h2 className="text-3xl font-bold mb-10 text-[#e1e2eb]">Operational Safety Layer</h2>
               <p className="text-[#bbcac6] mb-12 text-lg leading-relaxed">
                 Maintaining continuity in congested orbits requires more than tracking—it requires 
                 surgical precision in decision making.
@@ -330,7 +330,7 @@ export default function Home() {
           <h2 className="text-3xl font-bold mt-2 text-[#e1e2eb]">Engineered for Extremes</h2>
         </div>
         
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
           {[
             { icon: 'auto_mode', label: 'Autonomous Avoidance' },
             { icon: 'my_location', label: 'Real-time Tracking' },
@@ -378,7 +378,7 @@ export default function Home() {
         <div className="fixed bottom-8 right-8 z-50 animate-slideInRight">
           <div className="bg-[#1a1d26] border border-[#ffb4ab]/30 rounded-xl p-4 shadow-lg max-w-sm">
             <div className="flex items-start gap-3">
-              <span className="text-[#ffb4ab]">⚠️</span>
+              <span className="text-[#ffb4ab]"><span className="material-symbols-outlined">error</span></span>
               <div>
                 <p className="text-sm font-medium text-[#e1e2eb]">Connection issue</p>
                 <p className="text-xs text-[#bbcac6] mt-1">{error}</p>
@@ -419,12 +419,12 @@ function OperationalCard({ icon, title, description, features, delay, showSeveri
     >
       <div className="absolute top-0 left-0 w-1 h-full bg-[#4fdbc8] opacity-20 group-hover:opacity-100 transition-opacity" />
       
-      <span className="material-symbols-outlined text-[#4fdbc8] mb-6 text-4xl block">
+      <span className="material-symbols-outlined text-[#4fdbc8] mb-10 text-4xl block">
         {icon}
       </span>
       
       <h3 className="text-xl font-bold text-[#e1e2eb] mb-3">{title}</h3>
-      <p className="text-[#bbcac6] leading-relaxed mb-6">{description}</p>
+      <p className="text-[#bbcac6] leading-relaxed mb-10">{description}</p>
       
       <div className="border-t border-[#3c4947]/20 pt-6">
         <ul className="space-y-3 text-sm text-[#bbcac6]">
@@ -535,19 +535,19 @@ function HomePageSkeleton() {
       {/* Hero Skeleton */}
       <section className="relative min-h-[90vh] flex items-center justify-center -mt-24 pt-24 bg-[#0b0e14]">
         <div className="max-w-3xl mx-auto text-center px-8">
-          <div className="flex justify-center gap-4 mb-6">
+          <div className="flex justify-center gap-6 mb-10">
             <Skeleton className="h-4 w-32" />
             <Skeleton className="h-4 w-24" />
           </div>
           <Skeleton className="h-16 w-96 mx-auto mb-4" />
-          <Skeleton className="h-8 w-72 mx-auto mb-6" />
+          <Skeleton className="h-8 w-72 mx-auto mb-10" />
           <div className="flex gap-3 justify-center mb-8">
             <Skeleton className="h-10 w-24" />
             <Skeleton className="h-10 w-24" />
             <Skeleton className="h-10 w-24" />
           </div>
           <Skeleton className="h-20 w-full max-w-xl mx-auto mb-12" />
-          <div className="grid grid-cols-3 gap-4 max-w-2xl mx-auto mb-12">
+          <div className="grid grid-cols-3 gap-6 max-w-2xl mx-auto mb-12">
             <Skeleton className="h-24 w-full rounded-xl" />
             <Skeleton className="h-24 w-full rounded-xl" />
             <Skeleton className="h-24 w-full rounded-xl" />
