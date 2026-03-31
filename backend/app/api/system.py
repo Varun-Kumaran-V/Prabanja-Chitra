@@ -4,7 +4,10 @@ Provides high-level overviews and metrics without heavy recomputation.
 """
 
 from fastapi import APIRouter, Query
+from pydantic import BaseModel
+from typing import Optional
 
+from app.config import demo_mode_config
 from app.services.avoidance_service import avoidance_service
 from app.services.decision_service import decision_service
 from app.services.simulation_service import simulation_service
@@ -13,6 +16,83 @@ from app.services.event_log_service import event_log_service
 from app.models.event_log import EventType
 
 router = APIRouter()
+
+
+# =============================================================================
+# DEMO MODE CONTROL
+# =============================================================================
+
+
+class DemoModeRequest(BaseModel):
+    enabled: Optional[bool] = None
+    intensity: Optional[str] = None  # 'low', 'medium', 'high', 'max'
+    probability: Optional[float] = None
+
+
+@router.get("/demo-mode")
+async def get_demo_mode_status():
+    """Get current demo mode configuration.
+
+    Returns demo mode settings and status.
+    """
+    return {
+        "demo_mode": demo_mode_config.get_status(),
+        "description": (
+            "Demo mode injects controlled synthetic conjunctions to ensure "
+            "visible system activity during demonstrations. It influences "
+            "INPUTS only - all core avoidance logic runs normally."
+        ),
+        "intensity_presets": ["low", "medium", "high", "max"],
+    }
+
+
+@router.post("/demo-mode")
+async def set_demo_mode(request: DemoModeRequest):
+    """Toggle demo mode or adjust settings.
+
+    Args:
+        enabled: Enable or disable demo mode
+        intensity: Set preset intensity level ('low', 'medium', 'high', 'max')
+        probability: Set custom probability (0.0-1.0)
+
+    Demo mode generates synthetic conjunctions at controlled rates to ensure
+    the system has visible activity for demonstrations. All core logic
+    (conjunction detection, decision engine, maneuver planning) runs normally.
+    """
+    if request.enabled is not None:
+        demo_mode_config.enabled = request.enabled
+
+    if request.intensity is not None:
+        demo_mode_config.set_intensity(request.intensity)
+
+    if request.probability is not None:
+        demo_mode_config.probability = request.probability
+
+    return {
+        "status": "updated",
+        "demo_mode": demo_mode_config.get_status(),
+    }
+
+
+@router.post("/demo-mode/reset")
+async def reset_demo_mode():
+    """Reset demo mode to default settings."""
+    from app.config import Settings
+
+    # Reset to defaults from settings
+    defaults = Settings()
+    demo_mode_config._enabled = defaults.DEMO_MODE_ENABLED
+    demo_mode_config._probability = defaults.DEMO_CONJUNCTION_PROBABILITY
+    demo_mode_config._min_conjunctions = defaults.DEMO_CONJUNCTION_MIN_PER_STEP
+    demo_mode_config._max_conjunctions = defaults.DEMO_CONJUNCTION_MAX_PER_STEP
+    demo_mode_config._critical_prob = defaults.DEMO_CRITICAL_PROBABILITY
+    demo_mode_config._high_prob = defaults.DEMO_HIGH_PROBABILITY
+    demo_mode_config._medium_prob = defaults.DEMO_MEDIUM_PROBABILITY
+
+    return {
+        "status": "reset",
+        "demo_mode": demo_mode_config.get_status(),
+    }
 
 
 # =============================================================================

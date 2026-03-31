@@ -16,6 +16,7 @@ import random
 import uuid
 from typing import Optional
 
+from app.config import demo_mode_config
 from app.core.conjunction_detector import (
     conjunction_detector,
     MISS_DISTANCE_ALERT_THRESHOLD_M,
@@ -31,12 +32,6 @@ from app.services.decision_service import decision_service
 from app.models.decision import ThreatSeverity, SystemOperatingMode
 
 logger = logging.getLogger(__name__)
-
-# Demo mode settings - generate synthetic conjunctions for demonstration
-DEMO_MODE_ENABLED = True
-DEMO_CONJUNCTION_MIN_PER_STEP = 1
-DEMO_CONJUNCTION_MAX_PER_STEP = 3
-DEMO_CONJUNCTION_PROBABILITY = 0.7  # 70% chance per step to generate
 
 
 class AvoidanceService:
@@ -62,16 +57,22 @@ class AvoidanceService:
         """Generate synthetic conjunctions for demo purposes.
 
         This ensures the system always has activity to demonstrate even when
-        real orbital mechanics don't produce close approaches.
+        real orbital mechanics don't produce close approaches. Uses configurable
+        settings from demo_mode_config for flexible demonstration scenarios.
+
+        The synthetic conjunctions are realistic inputs that flow through the
+        entire pipeline - conjunction detection, decision engine, maneuver
+        planning, execution, and event logging all run normally.
 
         Returns:
             List of synthetic Conjunction objects
         """
-        if not DEMO_MODE_ENABLED:
+        # Check if demo mode is enabled (runtime configurable)
+        if not demo_mode_config.enabled:
             return []
 
         # Random chance to generate conjunctions
-        if random.random() > DEMO_CONJUNCTION_PROBABILITY:
+        if random.random() > demo_mode_config.probability:
             return []
 
         satellites = telemetry_service.get_all_satellites()
@@ -80,10 +81,10 @@ class AvoidanceService:
         if not satellites or not debris:
             return []
 
-        # Pick random count of conjunctions
+        # Pick random count of conjunctions based on config
         num_conjunctions = random.randint(
-            DEMO_CONJUNCTION_MIN_PER_STEP,
-            min(DEMO_CONJUNCTION_MAX_PER_STEP, len(satellites))
+            demo_mode_config.min_conjunctions,
+            min(demo_mode_config.max_conjunctions, len(satellites))
         )
 
         synthetic_conjunctions = []
@@ -121,25 +122,50 @@ class AvoidanceService:
             if not sat_telemetry or not debris_telemetry:
                 continue
 
-            # Generate realistic threat parameters
-            # Miss distance: 20-90m (always below 100m threshold for CRITICAL)
-            miss_distance_m = random.uniform(20.0, 90.0)
+            # Determine severity based on configured probabilities
+            severity_roll = random.random()
+            severity_probs = demo_mode_config.severity_probabilities
 
-            # Time to TCA: 30 minutes to 6 hours in future
-            time_to_tca = random.uniform(1800.0, 21600.0)
+            if severity_roll < severity_probs["critical"]:
+                # CRITICAL: very close approach (15-50m)
+                miss_distance_m = random.uniform(
+                    demo_mode_config.miss_distance_range[0],
+                    min(50.0, demo_mode_config.miss_distance_range[1])
+                )
+                severity = ConjunctionSeverity.CRITICAL
+            elif severity_roll < severity_probs["critical"] + severity_probs["high"]:
+                # HIGH: close approach (50-75m)
+                miss_distance_m = random.uniform(50.0, 75.0)
+                severity = ConjunctionSeverity.HIGH
+            else:
+                # MEDIUM: moderate approach (75-100m)
+                miss_distance_m = random.uniform(75.0, min(95.0, MISS_DISTANCE_ALERT_THRESHOLD_M - 5))
+                severity = ConjunctionSeverity.MEDIUM
 
-            # Relative velocity: typical LEO encounter 5-15 km/s
-            relative_velocity_ms = random.uniform(5000.0, 15000.0)
+            # Time to TCA from configured range
+            time_to_tca_range = demo_mode_config.time_to_tca_range
+            time_to_tca = random.uniform(time_to_tca_range[0], time_to_tca_range[1])
 
-            # Current distance: miss distance + closing distance
+            # More urgent conjunctions (CRITICAL) get shorter time to TCA
+            if severity == ConjunctionSeverity.CRITICAL:
+                time_to_tca = random.uniform(
+                    time_to_tca_range[0],
+                    time_to_tca_range[0] + (time_to_tca_range[1] - time_to_tca_range[0]) * 0.4
+                )
+
+            # Relative velocity from configured range
+            velocity_range = demo_mode_config.velocity_range
+            relative_velocity_ms = random.uniform(velocity_range[0], velocity_range[1])
+
+            # Current distance: miss distance + closing distance based on relative velocity
             current_distance_m = miss_distance_m + (relative_velocity_ms * random.uniform(0.01, 0.05))
 
             # Use satellite's current position for TCA position (approximate)
             sat_state = sat_telemetry.state
 
-            # Generate unique ID
+            # Generate unique ID with severity indicator
             self._synthetic_conj_counter += 1
-            conj_id = f"SYNTH-CONJ-{sat_id}-{debris_id}-{self._synthetic_conj_counter:04d}"
+            conj_id = f"SYNTH-{severity.value[:4].upper()}-{sat_id}-{self._synthetic_conj_counter:04d}"
 
             conjunction = Conjunction(
                 id=conj_id,
@@ -155,14 +181,14 @@ class AvoidanceService:
                 tca_position_x=sat_state.x,
                 tca_position_y=sat_state.y,
                 tca_position_z=sat_state.z,
-                severity=ConjunctionSeverity.CRITICAL,  # Always critical for demo
+                severity=severity,
                 status=ConjunctionStatus.DETECTED,
             )
 
             synthetic_conjunctions.append(conjunction)
             logger.info(
                 f"SYNTHETIC_CONJUNCTION_GENERATED | sat={sat_id} | debris={debris_id} | "
-                f"miss={miss_distance_m:.1f}m | tca_in={time_to_tca:.0f}s"
+                f"miss={miss_distance_m:.1f}m | tca_in={time_to_tca:.0f}s | severity={severity.value}"
             )
 
         return synthetic_conjunctions
@@ -193,14 +219,17 @@ class AvoidanceService:
             alert_threshold_m=MISS_DISTANCE_ALERT_THRESHOLD_M,
         )
 
-        # Step 2.5: DEMO MODE - Inject synthetic conjunctions if none detected
-        # This ensures visible system activity for demonstration purposes
+        # Step 2.5: DEMO MODE - Inject synthetic conjunctions for demonstration
+        # This ensures visible system activity even when real physics don't produce events
         synthetic_count = 0
         critical_real = [
             c for c in predicted_conjunctions
             if c.predicted_miss_distance_m < MISS_DISTANCE_ALERT_THRESHOLD_M
         ]
-        if DEMO_MODE_ENABLED and len(critical_real) == 0:
+        # Generate synthetic conjunctions if:
+        # 1. Demo mode is enabled
+        # 2. Either no real critical conjunctions OR probability triggers anyway
+        if demo_mode_config.enabled and (len(critical_real) == 0 or random.random() < 0.3):
             synthetic_conjunctions = self._generate_synthetic_conjunctions(sim_time)
             predicted_conjunctions.extend(synthetic_conjunctions)
             synthetic_count = len(synthetic_conjunctions)
@@ -388,7 +417,7 @@ class AvoidanceService:
             "mode_reason": mode_reason,
             "decisions_made": len(decisions_made),
             "synthetic_conjunctions": synthetic_count,
-            "demo_mode_active": DEMO_MODE_ENABLED,
+            "demo_mode_active": demo_mode_config.enabled,
         }
 
     def _handle_verification_failures(self, sim_time: float) -> list[dict]:

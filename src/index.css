@@ -9,6 +9,10 @@
   --color-stitch-error: #ffb4ab;
 }
 
+/* ============================================
+   BASE STYLES
+   ============================================ */
+
 /* Material Symbols font settings */
 .material-symbols-outlined {
   font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
@@ -17,4 +21,404 @@
 /* Base body styles */
 body {
   font-family: 'Inter', system-ui, sans-serif;
+  background-color: #10131a;
+  color: #e1e2eb;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0b0e14;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3c4947;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #4fdbc8;
+}
+
+/* Selection color */
+::selection {
+  background-color: #4fdbc8;
+  color: #003731;
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+/* Fade in up animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade in animation */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Slide in from left */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Slide in from right */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Scale in animation */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Skeleton shimmer */
+@keyframes skeleton {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Glow pulse */
+@keyframes glowPulse {
+  0%, 100% { 
+    box-shadow: 0 0 20px rgba(79, 219, 200, 0.2);
+  }
+  50% { 
+    box-shadow: 0 0 40px rgba(79, 219, 200, 0.4);
+  }
+}
+
+/* Float animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Radar sweep */
+@keyframes radarSweep {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Animation utility classes */
+.animate-fadeInUp {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+.animate-slideInLeft {
+  animation: slideInLeft 0.5s ease-out forwards;
+}
+
+.animate-slideInRight {
+  animation: slideInRight 0.5s ease-out forwards;
+}
+
+.animate-scaleIn {
+  animation: scaleIn 0.3s ease-out forwards;
+}
+
+.animate-skeleton {
+  animation: skeleton 2s linear infinite;
+}
+
+.animate-glowPulse {
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Animation delays */
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+.delay-600 { animation-delay: 600ms; }
+.delay-700 { animation-delay: 700ms; }
+.delay-800 { animation-delay: 800ms; }
+
+/* Initially hidden for animation */
+.animate-fadeInUp,
+.animate-slideInLeft,
+.animate-slideInRight,
+.animate-scaleIn {
+  opacity: 0;
+}
+
+/* ============================================
+   GLASS EFFECTS
+   ============================================ */
+
+.glass-panel {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: rgba(29, 32, 38, 0.6);
+  border: 1px solid rgba(79, 219, 200, 0.1);
+}
+
+.glass-dark {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: rgba(11, 14, 20, 0.8);
+}
+
+/* ============================================
+   GLOW EFFECTS
+   ============================================ */
+
+.glow-accent {
+  box-shadow: 0 0 20px rgba(79, 219, 200, 0.3);
+}
+
+.glow-accent-strong {
+  box-shadow: 0 0 40px rgba(79, 219, 200, 0.4);
+}
+
+.glow-error {
+  box-shadow: 0 0 20px rgba(255, 180, 171, 0.3);
+}
+
+.text-glow {
+  text-shadow: 0 0 20px rgba(79, 219, 200, 0.5);
+}
+
+/* ============================================
+   CARD STYLES
+   ============================================ */
+
+.card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.card-interactive {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.card-interactive:hover {
+  border-color: #4fdbc8;
+  box-shadow: 0 0 20px rgba(79, 219, 200, 0.1);
+}
+
+.card-interactive:active {
+  transform: scale(0.98);
+}
+
+/* ============================================
+   STATUS INDICATORS
+   ============================================ */
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.status-dot-pulse {
+  animation: pulse 2s infinite;
+}
+
+.status-nominal { background-color: #4fdbc8; }
+.status-warning { background-color: #ffb59e; }
+.status-critical { background-color: #ffb4ab; }
+.status-offline { background-color: #6c7086; }
+
+/* ============================================
+   GRADIENT UTILITIES
+   ============================================ */
+
+.gradient-radial-accent {
+  background: radial-gradient(circle at center, rgba(79, 219, 200, 0.15) 0%, transparent 70%);
+}
+
+.gradient-hero {
+  background: linear-gradient(180deg, #10131a 0%, #0b0e14 100%);
+}
+
+.gradient-card {
+  background: linear-gradient(135deg, #1d2026 0%, #191c22 100%);
+}
+
+/* ============================================
+   TYPOGRAPHY UTILITIES
+   ============================================ */
+
+.text-gradient {
+  background: linear-gradient(135deg, #4fdbc8 0%, #a0d0c6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.tracking-tighter { letter-spacing: -0.02em; }
+
+/* ============================================
+   LAYOUT UTILITIES
+   ============================================ */
+
+.container-page {
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+@media (max-width: 768px) {
+  .container-page {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+/* ============================================
+   FOCUS STYLES
+   ============================================ */
+
+.focus-ring:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #10131a, 0 0 0 4px #4fdbc8;
+}
+
+.focus-ring:focus:not(:focus-visible) {
+  box-shadow: none;
+}
+
+.focus-ring:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #10131a, 0 0 0 4px #4fdbc8;
+}
+
+/* ============================================
+   BUTTON STYLES
+   ============================================ */
+
+.btn-primary {
+  background-color: #4fdbc8;
+  color: #003731;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 0 20px rgba(79, 219, 200, 0.25);
+}
+
+.btn-primary:hover {
+  background-color: #3cc9b5;
+  box-shadow: 0 0 30px rgba(79, 219, 200, 0.4);
+  transform: translateY(-2px);
+}
+
+.btn-primary:active {
+  transform: scale(0.95);
+}
+
+.btn-secondary {
+  background-color: #272a31;
+  color: #e1e2eb;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background-color: #32353c;
+  transform: translateY(-2px);
+}
+
+.btn-secondary:active {
+  transform: scale(0.95);
+}
+
+/* ============================================
+   ARCHITECTURE ARROW STYLING
+   ============================================ */
+
+.arch-arrow-down::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -24px;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 16px;
+  background: linear-gradient(to bottom, #4fdbc8, #4fdbc8 50%, transparent);
+}
+
+.arch-arrow-down::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -24px;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 8px solid #4fdbc8;
+}
+
+/* ============================================
+   METRIC NUMBER STYLING
+   ============================================ */
+
+.metric-value {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' on;
 }
