@@ -39,31 +39,31 @@ A real-time mission control platform for managing satellite constellations with 
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
-│                        FRONTEND (React 18)                         │
-│  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐ │
-│  │   Home   │ │ Mission  │ │ Metrics  │ │Comparison│ │   3D     │ │
-│  │   Page   │ │ Control  │ │   Page   │ │   Page   │ │ Viewer   │ │
-│  └────┬─────┘ └────┬─────┘ └────┬─────┘ └────┬─────┘ └────┬─────┘ │
-│       └────────────┴────────────┴────────────┴────────────┘       │
-│                              │ API Service Layer                   │
-└──────────────────────────────┼─────────────────────────────────────┘
+│                        FRONTEND (React 18)                          │
+│  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐   │
+│  │   Home   │ │ Mission  │ │ Metrics  │ │Comparison│ │   3D     │   │
+│  │   Page   │ │ Control  │ │   Page   │ │   Page   │ │ Viewer   │   │
+│  └────┬─────┘ └────┬─────┘ └────┬─────┘ └────┬─────┘ └────┬─────┘   │
+│       └────────────┴────────────┴────────────┴────────────┘         │
+│                              │ API Service Layer                    │
+└──────────────────────────────┼──────────────────────────────────-───┘
                                │ HTTP/REST
 ┌──────────────────────────────┼─────────────────────────────────────┐
 │                        BACKEND (FastAPI)                           │
-│  ┌──────────────────────────────────────────────────────────────┐ │
-│  │                      API Routes (40+)                        │ │
-│  │  /simulate  /avoidance  /decisions  /history  /visualization │ │
-│  └──────────────────────────────────────────────────────────────┘ │
-│  ┌──────────────────────────────────────────────────────────────┐ │
-│  │                    Services Layer                            │ │
-│  │ SimulationService  AvoidanceService  DecisionService  etc.   │ │
-│  └──────────────────────────────────────────────────────────────┘ │
-│  ┌──────────────────────────────────────────────────────────────┐ │
-│  │                    Core Algorithms                           │ │
-│  │  OrbitPropagator   ConjunctionDetector   ManeuverPlanner    │ │
-│  │  (SGP4 + J2)       (KD-tree + Newton)    (RTN burns)        │ │
-│  └──────────────────────────────────────────────────────────────┘ │
-└─────────────────────────────────────────────────────────────────────┘
+│  ┌──────────────────────────────────────────────────────────────┐  │
+│  │                      API Routes (40+)                        │  │
+│  │  /simulate  /avoidance  /decisions  /history  /visualization │  │
+│  └──────────────────────────────────────────────────────────────┘  │
+│  ┌──────────────────────────────────────────────────────────────┐  │
+│  │                    Services Layer                            │  │
+│  │ SimulationService  AvoidanceService  DecisionService  etc.   │  │
+│  └──────────────────────────────────────────────────────────────┘  │
+│  ┌──────────────────────────────────────────────────────────────┐  │
+│  │                    Core Algorithms                           │  │
+│  │  OrbitPropagator   ConjunctionDetector   ManeuverPlanner     │  │
+│  │  (SGP4 + J2)       (KD-tree + Newton)    (RTN burns)         │  │
+│  └──────────────────────────────────────────────────────────────┘  │
+└────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
@@ -145,7 +145,7 @@ aether-constellation-manager/
 
 ```bash
 # Clone repository
-git clone https://github.com/yourusername/aether-constellation-manager.git
+git clone https://github.com/Varun-Kumaran-V/Prabanja-Chitra.git
 cd aether-constellation-manager
 
 # Install frontend dependencies
